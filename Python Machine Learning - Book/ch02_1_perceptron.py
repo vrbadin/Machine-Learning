@@ -1,4 +1,5 @@
 import numpy as np
+
 class Perceptron(object):
     ''' Perceptron classifier.
 
@@ -16,7 +17,7 @@ class Perceptron(object):
     errors  : list
         Number of misclassifications in every epoch.
     '''
-    def __init_(self, eta=0.01, n_iter=10):
+    def __init__(self, eta=0.01, n_iter=10):
         self.eta    = eta
         self.n_iter = n_iter
 
@@ -44,7 +45,7 @@ class Perceptron(object):
             for xi, target in zip(X, y):
                 update = self.eta * (target - self.predict(xi))
                 self.w_[1:] += update * xi
-                self.w_[0]  += update
+                self.w_[0]  += update # scalar product with 1's
                 errors      += int(update != 0.0)
             self.errors_.append(errors)
         return self
