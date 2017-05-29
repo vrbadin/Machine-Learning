@@ -1,6 +1,45 @@
 import numpy as np
+import collections
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
+import data.iris as dataSource
+
+def get_data():
+    '''
+    Iris dataset.
+    First 50 correspond to Iris-Setosa,
+    second 50 correspond to Iris-Versicolor.
+
+    Features used are only 2:
+    - sepal length,
+    - petal length.
+
+    Returns
+    ---------
+    Tuple containing X and y.
+    '''
+    rawData = dataSource.get()
+    y = rawData.iloc[0:100, 4].values
+    y = np.where(y == 'Iris-setosa', - 1, 1)
+    X = rawData.iloc[0:100, [0, 2]].values
+
+    Data = collections.namedtuple('Data', ['X', 'y'])
+    res = Data(X=X, y=y)
+    return res
+
+def plot_input_data():
+    '''
+    Graphic representation of input data.
+    '''
+    data = get_data()
+    plt.scatter(data.X[:50, 0], data.X[:50, 1],
+                color='red', marker='o', label='setosa')
+    plt.scatter(data.X[50:100, 0], data.X[50:100, 1],
+                color='blue', marker='x', label='versicolor')
+    plt.xlabel('sepal length')
+    plt.ylabel('petal length')
+    plt.legend(loc='upper left')
+    plt.show()
 
 def plot_decision_regions(X, y, classifier, resolution=0.02):
     '''
