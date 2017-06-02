@@ -67,3 +67,12 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
         plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1],
                     alpha=0.8, c=cmap(idx),
                     marker=markers[idx], label=cl)
+
+def standardise(X):
+    '''
+    Transforms X using standardisation.
+    '''
+    X_std = np.copy(X)
+    X_std[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()
+    X_std[:, 1] = (X[:, 1] - X[:, 1].mean()) / X[:, 1].std()
+    return X_std

@@ -34,15 +34,6 @@ def test_convergence():
     ax[1].set_title('Adaline - Learning rate 0.0001')
     plt.show()
 
-def standardise(X):
-    '''
-    Transforms X using standardisation.
-    '''
-    X_std = np.copy(X)
-    X_std[:, 0] = (X[:, 0] - X[:, 0].mean()) / X[:, 0].std()
-    X_std[:, 1] = (X[:, 1] - X[:, 1].mean()) / X[:, 1].std()
-    return X_std
-
 def test_convergence_standardised():
     '''
     Plots graph of convergence for
@@ -53,7 +44,7 @@ def test_convergence_standardised():
     Improved convergence!
     '''
     data = fun.get_data()
-    X_std = standardise(data.X)
+    X_std = fun.standardise(data.X)
     adal = AdalineGD(n_iter=15, eta=0.01)
     adal.fit(X_std, data.y)
     fun.plot_decision_regions(X_std, data.y, classifier=adal)
