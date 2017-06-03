@@ -1,7 +1,9 @@
-import numpy as np
+import chapter_2.helper_functions as fun
 import matplotlib.pyplot as plt
-from ch02_2_adaline import AdalineGD
-import ch02_helper_functions as fun
+import numpy as np
+
+from chapter_2.adaline import AdalineGD
+
 
 def test_convergence():
     '''

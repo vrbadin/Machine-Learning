@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
-from ch02_3_adaline_sgd import AdalineSGD
-import ch02_helper_functions as fun
+from chapter_2.adaline_sgd import AdalineSGD
+from chapter_2 import helper_functions as fun
+
 
 def test_convergence():
     '''

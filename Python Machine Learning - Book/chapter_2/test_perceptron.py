@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
-from ch02_1_perceptron import Perceptron
-import ch02_helper_functions as fun
+from chapter_2.perceptron import Perceptron
+from chapter_2 import helper_functions as fun
+
 
 def get_perceptron():
     '''
