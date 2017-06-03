@@ -16,7 +16,22 @@ Convergence is only guaranteed if the two classes are linearly separable and the
 - Perceptron converges after 6 epochs
 - Convergence and decision regions plotted
 
-## 2.2. Adaline 
-Adaline (ADAptive LInear NEuron) is another type of single-layer neural network.
+### 2.2. Adaline 
+Adaline (ADAptive LInear NEuron) is another type of single-layer neural network. Weights are being updated based on a linear activation function rather than a unit step function like in the perceptron. A `quantizer` (similar to the unit step function) is then used to predict the class labels. We are using gradient descent in 2 versions:
+- Batch gradient descent - uses all of the samples for the update
+- Stochastic gradient descent - uses randomised (or online) samples one at the time for the update
+It is also possible to do mini-batch which is combination of the two - use the `n` samples at the time for the update (`n=50` for instance)
+
+#### Exercise
+
+- Use batch gradient descent on Iris dataset, shows overshooting and small update step properties
+- After normalising the sample input, results improve a lot
+- Gradient descent shows steeper convergence
+- Convergence and decision regions plotted
+
+## Chapter 3. Machine Learning Classifiers Using Scikit-learn
+
+
+
 
 
