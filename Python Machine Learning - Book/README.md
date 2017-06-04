@@ -106,6 +106,19 @@ Roughly speaking, the term kernel can be interpreted as a similarity function be
 - Use kernel SVM with `C=1.0`, `gamma=0.2` - soft boundary.
 - Use kernel SVM with `C=1.0`, `gamma=100.0` - hard boundary.
 
+### 3.6. Decision trees
+
+Decision trees break the feature space into rectangles. Popular information gain functions are Gini Impurity (`p(1 - p)`) and Entropy (`p log_2 p`), though they often yield similar results due to the similar shape.
+
+We are able to store the decision tree in `.dot ` and view it in Graphviz (program to download) via the following command:
+`dot -Tpng tree.dot -o tree.png`
+
+#### Exercise
+- Use the same Iris dataset
+- Use decision tree with `max_depth=3` and entropy function.
+
+
+
 
 
 
