@@ -32,6 +32,21 @@ It is also possible to do mini-batch which is combination of the two - use the `
 ## Chapter 3. Machine Learning Classifiers Using Scikit-learn
 
 
+*No Free Lunch theorem* - no single classifier works best across all possible scenarios.
+
+Main steps that are involved in training a machine learning algorithm:
+1. Selection of features.
+2. Choosing a performance metric.
+3. Choosing a classifier and optimization algorithm.
+4. Evaluating the performance of the model.
+5. Tuning the algorithm.
+
+#### Exercise
+- Iris data loading via scikit-learn
+  - Flower names are already stored as integers (0, 1, 2), which is recommended for the optimal performance of many machine learning libraries.
+- Using cross-validation to split the training and test data
+- Using `StandardScaler` to preprocess the data
+- Train perceptron model. Library automatical uses *One-vs.-Rest (OvR)* method, which allows us to feed the three flower classes all at once.
 
 
 
