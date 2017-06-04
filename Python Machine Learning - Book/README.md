@@ -94,9 +94,17 @@ We can initialise perceptron, logistic regression and SVM in the following way:
 `lr  = SGDClassifier(loss='log')`
 `svm = SGDClassifier(loss='hinge')`
 
+### 3.5. Kernel SVMs
 
+The popularity of SVMs is due to its capability of being easily *kernelized* to solve nonlinear classification problems. One of the most widely used kernels is the *Radial Basis Function kernel (RBF kernel)* or Gaussian kernel:
+`k(x^1, x^2) = exp{ -gamma L2_diff(x^1, x^2) }`, where `gamma` is the free parameter to be optimized.
 
+Roughly speaking, the term kernel can be interpreted as a similarity function between a pair of samples. Very similar terms will result in 1, and very dissimilar samples in 0 (due to exponential term).
 
+#### Exercise
+- Use the same Iris dataset
+- Use kernel SVM with `C=1.0`, `gamma=0.2` - soft boundary.
+- Use kernel SVM with `C=1.0`, `gamma=100.0` - hard boundary.
 
 
 
