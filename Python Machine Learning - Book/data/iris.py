@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn import datasets
 
 def get():
     '''
@@ -13,4 +14,11 @@ def test_loading():
     Return last 5 lines to check correct data loading
     '''
     return get().tail()
+
+def get_skl():
+    '''
+    Get the data via scikit-learn
+    '''
+    iris = datasets.load_iris()
+    return iris
 
