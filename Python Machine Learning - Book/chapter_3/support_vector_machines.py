@@ -38,3 +38,29 @@ plt.xlabel('petal length [standardized]')
 plt.ylabel('petal width [standardized]')
 plt.legend(loc='upper left')
 plt.show()
+
+# 6. Kernel SVM, using a RBF kernel
+#    Soft bondary due to small gamma=0.2
+svm = SVC(kernel='rbf', random_state=0, gamma=0.2, C=1.0)
+svm.fit(X_train_std, y_train)
+plot_decision_regions(X_combined_std,
+                      y_combined,
+                      classifier=svm,
+                      test_idx=range(105, 150))
+plt.xlabel('petal length [standardized]')
+plt.ylabel('petal width [standardized]')
+plt.legend(loc='upper left')
+plt.show()
+
+# 7. Kernel SVM, using a RBF kernel
+#    Hard bondary due to high gamma=100.0
+svm = SVC(kernel='rbf', random_state=0, gamma=100.0, C=1.0)
+svm.fit(X_train_std, y_train)
+plot_decision_regions(X_combined_std,
+                      y_combined,
+                      classifier=svm,
+                      test_idx=range(105, 150))
+plt.xlabel('petal length [standardized]')
+plt.ylabel('petal width [standardized]')
+plt.legend(loc='upper left')
+plt.show()
