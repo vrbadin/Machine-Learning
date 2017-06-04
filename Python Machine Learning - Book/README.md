@@ -69,6 +69,19 @@ The regularization is done by adding a term `0.5*lambda*L2_sum(weights)`. Conven
 - Perform logistic regression using `C=1000.0`.
 - Perform logistic regressions for a set of values `C`, observing the shrinkage of parameters for low `C`.
 
+### 3.2. Support Vector Machines (SVMs)
+
+In SVMs, the objective is to maximize *margin*. Margin is defined as the distance between the separating hyperplane (decision boundary) and the training samples that are closest to this hyperplane, which are the so-called *support vectors*.
+
+The slack variable `ksi` is introduced for linearly non-separable data. The problem transforms into:
+`w^T x >= 1 - ksi` if `y = 1`
+`w^T x <= -1 + ksi` if `y = 0`,
+so the objective to be minimized is `0.5*L2_sum(weights) + C sum(ksi)`.
+
+#### Exercise
+- Use the same Iris dataset
+- Use SVM with `C=1.0`.
+
 
 
 
