@@ -136,5 +136,17 @@ Defaults used are:
 - Use the same Iris dataset
 - Use random forest with `n=10` and entropy function.
 
+### 3.8. k-Nearest Neighbors (KNN)
+
+The steps KNN follows are:
+1. Choose the number or `k` and distance metric
+2. Find the `k` nearest neighbours of the sample that we want to classify
+3. Assign the class label by majority vote
+
+Storage space can become a challenge if we are working with the large datasets. It is the memory-based algorithm - there is no training step involved. There are no parameters to be optimised.
+
+#### Exercise
+- Use the same Iris dataset
+- Use KNN with `k=5` and Minkowski metric with `p=2` (Euclid space).
 
 
