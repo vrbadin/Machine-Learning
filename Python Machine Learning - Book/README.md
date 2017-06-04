@@ -41,12 +41,30 @@ Main steps that are involved in training a machine learning algorithm:
 4. Evaluating the performance of the model.
 5. Tuning the algorithm.
 
+### 3.1. Perceptrons via Scikit-learn
+
 #### Exercise
 - Iris data loading via scikit-learn
   - Flower names are already stored as integers (0, 1, 2), which is recommended for the optimal performance of many machine learning libraries.
 - Using cross-validation to split the training and test data
 - Using `StandardScaler` to preprocess the data
 - Train perceptron model. Library automatical uses *One-vs.-Rest (OvR)* method, which allows us to feed the three flower classes all at once.
+- Plot decision region, highlighting the test data.
+
+### 3.2. Logistic Regression
+
+It performs very well on linearly separable sets. 
+
+*Odds ratio* - given positive event `p`, odds ratio is defined as `p/(1-p)`
+*Logit function* - log of odds ratio, transforms (0, 1) to the whole set of reals. Its inverse is sigmoid function.
+
+In Adaline, activation function is an identity. In logistic regression, the activation function is sigmoid. The output of the sigmoid function is then interpreted as the probability of particular sample belonging to class 1.
+
+
+
+
+
+
 
 
 
