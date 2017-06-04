@@ -60,7 +60,14 @@ It performs very well on linearly separable sets.
 
 In Adaline, activation function is an identity. In logistic regression, the activation function is sigmoid. The output of the sigmoid function is then interpreted as the probability of particular sample belonging to class 1.
 
+Log-likelihood is sum of the terms `ylog(f(y)) + (1-y)log(f(1-y))`, which is either the first or the second term in the sum, depending on whether `y=0` or `y=1`.
 
+The regularization is done by adding a term `0.5*lambda*L2_sum(weights)`. Convention is to instead deal with its inverse `C = 1/lambda`.
+
+#### Exercise
+- Use the same Iris dataset
+- Perform logistic regression using `C=1000.0`.
+- Perform logistic regressions for a set of values `C`, observing the shrinkage of parameters for low `C`.
 
 
 
