@@ -69,7 +69,7 @@ The regularization is done by adding a term `0.5*lambda*L2_sum(weights)`. Conven
 - Perform logistic regression using `C=1000.0`.
 - Perform logistic regressions for a set of values `C`, observing the shrinkage of parameters for low `C`.
 
-### 3.2. Support Vector Machines (SVMs)
+### 3.3. Support Vector Machines (SVMs)
 
 In SVMs, the objective is to maximize *margin*. Margin is defined as the distance between the separating hyperplane (decision boundary) and the training samples that are closest to this hyperplane, which are the so-called *support vectors*.
 
@@ -78,9 +78,23 @@ The slack variable `ksi` is introduced for linearly non-separable data. The prob
 `w^T x <= -1 + ksi` if `y = 0`,
 so the objective to be minimized is `0.5*L2_sum(weights) + C sum(ksi)`.
 
+Typically it has very similar performance to the logistic regression in practical classification tasks. Logistic regression has the advantage of being a simpler model, and can be easily updated, which is attractive when working with streaming data.
+
 #### Exercise
 - Use the same Iris dataset
 - Use SVM with `C=1.0`.
+
+### 3.4. Alternative Implementations in Scikit-learn
+
+The  `Perceptron` and `LogisticRegression` classes used so far make use of the hihgly optimised LIBLINEAR library in C/C++. Likewise, `SVC` class makes use of LIBSVM, which is a specialised C/C++ library. The advantage of using these over Python implementations is that they allow for quick training of large amounts of linear classifiers. If the data is too large to fit into computer memory, we can use `SGDClassifier` class, which also supports online learning via `partial_fit` method. 
+
+We can initialise perceptron, logistic regression and SVM in the following way:
+`from sklearn.linear_model import SGDClassifier`
+`ppn = SGDClassifier(loss='perceptron')`
+`lr  = SGDClassifier(loss='log')`
+`svm = SGDClassifier(loss='hinge')`
+
+
 
 
 
