@@ -171,5 +171,11 @@ Storage space can become a challenge if we are working with the large datasets. 
   - `StandardScaler` scales by mean and variance
   
 ### 4.5. Selecting meaningful features
-  - 
+  - There are 2 ways to reduce dimensionality: *feature selection* and *feature extraction*. We are dealing currently with the feature extraction.
+  - Classical feature selection algorithm is *Sequential Backward Selection*, which aims to reduce dimensionality of the initial feature subspace with a minimum decay in performance of the classifier. We implemented `SBS` class which takes a classifier as input (for instance, KNN Classifier).
+  - Using random forest, we can measure feature importance as the averaged impurity decrease computed from all decision trees in the forest without making any assumptions whether our data is linearly separable or not. The issue could appear with highly correlated features - random forest may prefer much more one of them.
+  
+## Chapter 5. Compressing Data via Dimensionality Reduction
+
+
 
