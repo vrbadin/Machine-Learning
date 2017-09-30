@@ -41,3 +41,13 @@ plt.xlabel('petal length [standardized]')
 plt.ylabel('petal width [standardized]')
 plt.legend(loc='upper left')
 plt.show()
+
+# 5. (FROM CHAPTER 4.) Plot feature importances
+import numpy as np
+feat_labels = 'TODO: Fill the labels here!!!' #df.columns[1:]
+importances = forest.feature_importances_
+indices = np.argsort(importances)[::-1]
+for f in range(X_train.shape[1]):
+    print("%2d) %-*s %f" %(f+1, 30,
+                           feat_labels[indices[f]],
+                           importances[indices[f]]))
