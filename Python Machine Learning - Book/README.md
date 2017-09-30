@@ -149,4 +149,16 @@ Storage space can become a challenge if we are working with the large datasets. 
 - Use the same Iris dataset
 - Use KNN with `k=5` and Minkowski metric with `p=2` (Euclid space).
 
+## Chapter 4. Data Preprocessing
+
+### 4.1. Basic Data Preprocessing Techniques
+
+*Dealing with missing data*. 
+  - There is a `dropna` method which allows to drop particular rows/columns which contain NAs. Additionally, you can drop in a thresholded way (i.e. rows that contain more than 4 NAs).
+  - Instead of dropping NAs, you can *impute the data*. `Imputer` class is used, with its parameter `strategy` allowing to specify the method of imputation. Some of the most common strategies are `mean`, `median` and `most_frequent`.
+*Handling categorical data*
+  - Labels should be mapped to int.
+  - `LabelEncoder` allows for mapping string to int. For example, it maps `{red, green, blue}` to `{0, 1, 2}` and that is the issue - it introduces ordering.
+  - `OneHotEncoder` mitigates the issue above and creates a new boolean columns.
+  - `DataFrame` has a very convenient method for OneHotEncoder - `get_dummies`.
 
