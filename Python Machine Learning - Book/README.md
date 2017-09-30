@@ -149,4 +149,27 @@ Storage space can become a challenge if we are working with the large datasets. 
 - Use the same Iris dataset
 - Use KNN with `k=5` and Minkowski metric with `p=2` (Euclid space).
 
+## Chapter 4. Data Preprocessing
+
+### 4.1. Dealing with missing data
+
+  - There is a `dropna` method which allows to drop particular rows/columns which contain NAs. Additionally, you can drop in a thresholded way (i.e. rows that contain more than 4 NAs).
+  - Instead of dropping NAs, you can *impute the data*. `Imputer` class is used, with its parameter `strategy` allowing to specify the method of imputation. Some of the most common strategies are `mean`, `median` and `most_frequent`.
+ 
+### 4.2. Handling categorical data
+  - Labels should be mapped to int.
+  - `LabelEncoder` allows for mapping string to int. For example, it maps `{red, green, blue}` to `{0, 1, 2}` and that is the issue - it introduces ordering.
+  - `OneHotEncoder` mitigates the issue above and creates a new boolean columns.
+  - `DataFrame` has a very convenient method for OneHotEncoder - `get_dummies`.
+  
+### 4.3. Partitioning a dataset in training and test sets
+  - `train_test_split` from `cross_validation` module handles the split. 
+  - Most common splits are 60:40, 70:30, 80:20, however for the large datasets also common ones are 90:10 and 99:1.
+  
+### 4.4. Bringing features onto the same scale
+  - `MinMaxScaler` scales proportionally from 0 to 1
+  - `StandardScaler` scales by mean and variance
+  
+### 4.5. Selecting meaningful features
+  - 
 
