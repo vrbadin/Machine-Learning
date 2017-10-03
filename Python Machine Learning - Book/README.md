@@ -186,9 +186,21 @@ PCA directions are highly sensitive to data scaling, and we need to standardize 
   - Use the plot_decision_regions
   - Use the logistic regression classifier on data using the first 2 principal components
   
-### 5.2. Supervised data compression via linear discriminant analysis
+### 5.2. Supervised data compression via linear discriminant analysis (LDA)
 
+The general concept behind LDA is very similar to PCA, whereas PCA attempts to find the orthogonal component axes of maximum variance in a dataset; the goal in LDA is to find the feature subspace that optimizes class separability. 
 
+Thus, we might intuitively think that LDA is a superior feature extraction technique for classification tasks than PCA. However, it was reported that preprocessing via PCA tends to result in better classification results in an image recognition tasks in certain cases, for instance, if each class consists of only a small number of samples.
+
+One assumption in LDA is that the data is *normally distributed*. Also, we assume that the *classes have identical covariance matrices* and that *the features are statistically independent of each other*. However, even if one or more of those assumptions are slightly violated, LDA for dimensionality reduction can still work.
+
+Steps of LDA approach:
+  1. Standardise the `d`-dimensional dataset 
+  2. For each class, compute the `d`-dimensional mean vector
+  3. Construct the between-class scatter matrix `S_B` and the within-class scatter matrix `S_w`
+  4. Compute the eigenvectors and corresponding eigenvalues of the matrix `S_w^{-1} S_B`
+  5. Choose the `k` eigenvectors that correspond to the `k` largest eigenvalues to construct a `d \times k`-dimensional transformational matrix `W`; the eigenvectors are the columns of this matrix
+  6. Project the samples onto the new feature subspace using the transformation matrix `W`
 
 
 
