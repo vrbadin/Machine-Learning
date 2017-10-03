@@ -177,5 +177,19 @@ Storage space can become a challenge if we are working with the large datasets. 
   
 ## Chapter 5. Compressing Data via Dimensionality Reduction
 
+### 5.1. Principal component analysis (PCA)
+
+PCA directions are highly sensitive to data scaling, and we need to standardize the features prior to PCA if the features were measured on different scales and we want to assign equal importance to all features.
+
+#### Exercise
+  - Use the iris dataset and standardised data as before
+  - Use the plot_decision_regions
+  - Use the logistic regression classifier on data using the first 2 principal components
+  
+### 5.2. Supervised data compression via linear discriminant analysis
+
+
+
+
 
 
