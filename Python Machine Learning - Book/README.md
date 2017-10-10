@@ -202,6 +202,26 @@ Steps of LDA approach:
   5. Choose the `k` eigenvectors that correspond to the `k` largest eigenvalues to construct a `d \times k`-dimensional transformational matrix `W`; the eigenvectors are the columns of this matrix
   6. Project the samples onto the new feature subspace using the transformation matrix `W`
 
+## Chapter 6. Best Practices for Model Evaluation and Hyperparameter Tuning
+
+### 6.1. Pipeline
+
+`Pipeline` from `sklearn.pipeline` gives us a handy tool to stack several algorithms on top of each other, as long as they have `fit` and `transform`. When `fit` is called on this object, it executes `fit` and `transform` of each method in the order.
+
+#### Exercise
+  - Use breast cancer dataset
+  - Stack StandardScaler, PCA and LogisticRegression into a pipeline.
+  
+### 6.2. k-fold Cross-Validation for Model Performance
+
+One standard way of tuning model is a *holdout method* - split the data into training, validation and test data sets. Use validation for improving the training and test at the end. The main drawback of this method is the sensitivity on how the data is split. 
+
+*k-fold cross-validation method* remediates this issue. We split the data into `k` folds, where at each iteration `k-1` folds are used for model training and one fold is used for testing. This procedure is repeated `k` times so that we obtain `k` models and performance estimates. Estimated performance is then used as average of these `k` perfomances.
+
+One thing to be mindful of is to preserve the original data scaling. For example, if you have to apply `StandardScaler`, then you have to do it again for each choice of training set.
+
+The method for k-fold cross-validation is `StratifiedKFold` from `sklearn.cross_validation`. From the same import, we can make use of `cross_val_score` which is much easier to use. Useful argument is `n_jobs` which controls the number of CPU used (the algorithm is clearly parallelizable). If set `n_jobs=-1`, you make use of all available compute power. 
+
 
 
 
