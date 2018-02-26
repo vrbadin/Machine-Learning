@@ -222,6 +222,20 @@ One thing to be mindful of is to preserve the original data scaling. For example
 
 The method for k-fold cross-validation is `StratifiedKFold` from `sklearn.cross_validation`. From the same import, we can make use of `cross_val_score` which is much easier to use. Useful argument is `n_jobs` which controls the number of CPU used (the algorithm is clearly parallelizable). If set `n_jobs=-1`, you make use of all available compute power. 
 
+### 6.3. Confusion Matrix
 
+Given an actual and predicted class, positives are what predicted class classified as positive (same for negatives). Correctly classified positives are True Positives (TP) and incorrectly classified positives are False Positives (FP). This is represented by a confusion matrix, and there is a method `confusion_matrix` in `sklearn.metrics`.
 
+Several metrics from confusion matrix:
+  - `ERR = (FP + FN) / (FP + FN + TP + TN)`
+      - *Prediction error* measures the total incorrectly classified
+  - `ACC = 1 - ERR`
+      - *Accuracy* measures the total correctly classified
+  - `FPR = FP / N = FP / (FP + TN)`
+  - `TPR = TP / P = TP / (FN + TP)`
+      - *False Positive Rate* and *True Positive Rate* are useful for imbalanced problems (for instance, for tumor detection we want low FPR to not concern patient)
+  - `PRE = TP / (TP + FP)`
+  - `REC = TPR`
+  - `F1 = 2 * PRE * REC / (PRE + REC)`
+      - *Precision* and *Recall* are metrics used in defining *F1-score*.
 
