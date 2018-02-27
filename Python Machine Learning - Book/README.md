@@ -239,3 +239,13 @@ Several metrics from confusion matrix:
   - `F1 = 2 * PRE * REC / (PRE + REC)`
       - *Precision* and *Recall* are metrics used in defining *F1-score*.
 
+### 6.4. Receiver Operating Characteristic (ROC)
+
+ROC graphs are useful tools for selecting models for classification based on their performance with respect to the false positive and true positive rates, which are computed by shifting the decision threshold of the classifier. The diagonal of ROC graph can be interpreted as random guessing, and the perfect classifier would fall into the top left corner. Based on the ROC curve, we can then compute the *Area Under Curve (AUC)* to characterize the performance of a classification model.
+
+#### Exercise
+  - Use breast cancer dataset
+  - Stack StandardScaler, PCA and LogisticRegression into a pipeline
+  - Stratified k fold in 3 folds
+  - Plot ROC for all 3 folds
+  - Compute AUC and Accuracy directly
