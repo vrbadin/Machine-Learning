@@ -249,3 +249,51 @@ ROC graphs are useful tools for selecting models for classification based on the
   - Stratified k fold in 3 folds
   - Plot ROC for all 3 folds
   - Compute AUC and Accuracy directly
+  
+## Chapter 7. Combining Different Models for Ensemble Learning
+
+The goal behind *ensemble methods* is to combine different classifiers into a meta-classifier that has a better generalisation performance than each individual classifier alone. The simplest one is based on a *majority voting principle*. 
+
+### 7.1. Majority Voting
+
+Same idea can be applied to multi-class and to binary voting, and we will further on assume binary setting. The idea is simple - take several classifiers and choose what majority has picked. The motivation behind this is following - assuming each classifier has the same, uncorrelated error `eps`, the error of majority voting ensemble will be based on a binomial distribution `\sum (n \over k) eps^k (1 - eps)^(1-k)`, which is smaller.
+
+Furthermore, the voting itself can be weighted, so the formulation of the weighted majority vote is as follows:
+`y = \argmax(i) \sum w_j Indicator(C_j = i)`, 
+whereas for simple weights this simplifies into
+`y = mode {C_1(x), ... , C_m(x)}`.
+This can be conveniently translated into Python via
+`np.argmax(np.bincount([0, 0, 1], weights=[0.2, 0.2, 0.6]))`,
+and in the future there will also be `sklearn.ensemble.VotingClassifier`. The perfomance can then be improved via hyperparameter tuning of each classifier.
+
+### 7.2. Bagging - building an ensemble of classifiers from bootstrap samples
+
+Instead of using the same training set to fit the individual classifiers in the ensemble, we draw bootstrap samples (random samples with replacement) from the initial training set, which is why bagging is also known as *bootstrap aggregating*. Random forests are special case of bagging where we also use random feature subsets to fit individual decision trees.
+
+We can invoke it via `sklearn.ensemble.BaggingClassifier`. Bagging is efficient in reducing the overfitting of decision trees.
+
+### 7.3. Adaptive Boosting (AdaBoost)
+
+The key concept behind boosting is to focus on training samples that are hard to classify, that is, to let the *weak learners* subsequently learn from misclassified training samples to improve the performance of the ensemble. In contrast to bagging, the initial formulation of boosting, the algorithm uses random subsets of training samples drawn without replacement. The original boosting procedure is summarised in four key steps:
+  1. Draw a random subset of training samples `d_1` without replacement from the training set `D` to train a weak learner `C_1`.
+  2. Draw a second random training subset `d_2` without replacement from the training set and add 50% of the samples that were previously misclassified to train a weak learner `C_2`.
+  3. Find the training samples `d_3` in the training set `D` on which `C_1` and `C_2` disagree to train a third weak learner `C_3`.
+  4. Combine the weak learners `C_1`, `C_2` and `C_3` via majority voting.
+  
+Boosting can lead to a decrease in bias as well as variance compared to bagging models. In practice, however, boosting algorithms such as AdaBoost are also known for their high variance (tendency to overfit).
+
+In contrast to the original boosting procedure, AdaBoost uses the complete training set to train where the training samples are reweighted in each iteration to build a strong classifier that learns from the mistakes of the previous weak learners in the ensemble. The pseudocode is as follows (x denotes elementwise, * denotes scalar product):
+  1. Set the weight vector `w` to uniform weights `\sum w_i = 1`
+  2. for `j` in `m` boosting rounds, do the following:
+  3. Train a weighted weak learner: `C_j = train(X, y, w)`
+  4. Predict class labels: `hat(y) = predict(C_j, X)`
+  5. Compute weighted error rate: `eps = w * (hat(y) == y)`
+  6. Compute coefficient: `\alpha_j = 0.5 log ((1 - eps)/eps)`
+  7. Update weights: `w = w x exp(-\alpha_j x hat(y) x y)`
+  8. Normalize weights to sum to 1
+  9. Compute final prediction: `hat(y) = sum(\alpha_j x predict(C_j, X)) > 0`
+  
+AdaBoost can be invoked via `sklearn.ensemble.AdaBoostClassifier`.
+
+
+
