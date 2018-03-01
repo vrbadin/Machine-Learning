@@ -295,5 +295,19 @@ In contrast to the original boosting procedure, AdaBoost uses the complete train
   
 AdaBoost can be invoked via `sklearn.ensemble.AdaBoostClassifier`.
 
+## Chapter 10. Predicting Continuous Target Variables with Regression Analysis
 
+### 10.1. Visualizing the important characteristics of a dataset
 
+*Exploratory Data Analysis (EDA)* is an important and recommended first step prior to the training of a machine learning model. It may help us visually detect the presence of outliers, the distribution of the data, and the relationships between features.
+
+Useful package is `seaborn`, which is a Python library for drawing statistical plots based on matplotlib. We will explore its scatterplot (`pairplot`) and heat map (`heatmap`) methods.
+
+#### Exercise
+  - Use housing dataset
+  - Plot the scatterplot of 5 chosen features
+    - Notice a linear relationship between RM and MEDV
+    - Notice MEDV has a normal distribution, but contains several outliers
+  - Plot a heatmap of a correlation matrix
+    - The highest correlation has LSTAT, however from scatterplot we see the relationship is not linear
+    - Therefore, we will regress MEDV on RM
