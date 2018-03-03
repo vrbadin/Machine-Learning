@@ -336,3 +336,33 @@ It is invoked via `from sklearn.linear_model import RANSACRegressor`. By default
 #### Exercise
   - Use housing dataset and regress MEDV on RM
   - Plot the regression line and inlier vs outlier points
+
+### 10.4. Evaluating the performance of linear regression models
+
+When dealing with multiple linear regression, we can't always visualize the linear regression line, but we can plot residuals.  Those *residual plots* are commonly used graphical analysis for diagnosing regression models to detect nonlinearity and outliers, and to check if the errors are randomly distributed.
+
+Another useful measure of model performance is *Mean Squared Error (MSE)*, which is simply the average value of the SSE cost function that we minimize to fit regression model. Sometimes you can report the *coefficient of determination (R^2)*, which can be understood as standardized version of MSE:
+`R^2 = 1 - SSE/SST = 1 - MSE / Var(y)`.
+
+#### Exercise
+  - Use housing dataset and regress MEDV on all features
+  - Plot the residuals, compute MSE and R^2 using their scikit-learn functions
+  
+### 10.5. Using regularized methods for regression
+
+The most popular methods are:
+  - *Ridge Regression* - add the squared sum of weights
+  - *LASSO* - add the sum of absolute values. It can be used as a feature selection tool.
+  - *Elastic Net* - take both sum of squared and absolute weights. Limitation of LASSO is that it selects at most `n` variables if `m>n`. L1 penalty generates sparcity and L2 overcomes some of the LASSO limitations.
+  
+They can be initialized as follows:
+`from sklearn.linear_model import Ridge, Lasso, ElasticNet
+ridge = Ridge(alpha=1.0)
+lasso = Lasso(alpha=1.0)
+elnet = ElasticNet(alpha=1.0, l1_ratio=0.5)`
+For elastic net, if `l1_ratio=1.0`, it would be identical to LASSO.
+
+### 10.6. Polynomial regression
+
+We are able to use the same `LinearRegression` method with `from sklearn.preprocession import PolynomialFeatures` to perform polynomial regression. Simply define `cube = PolynomialFeatures(degree = 3)` which you then apply on the data via `cube.fit_transform(X)`.
+
