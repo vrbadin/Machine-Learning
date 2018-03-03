@@ -311,3 +311,28 @@ Useful package is `seaborn`, which is a Python library for drawing statistical p
   - Plot a heatmap of a correlation matrix
     - The highest correlation has LSTAT, however from scatterplot we see the relationship is not linear
     - Therefore, we will regress MEDV on RM
+    
+### 10.2. Ordinary least squares linear regression model
+
+It is invoked via `from sklearn.linear_model import LinearRegression`. The implementation makes use of the LIBLINEAR library and advanced optimization algorithms that work better with unstandardized variables.
+
+#### Exercise
+  - Use housing dataset and regress MEDV on RM
+  - Plot the regression line and points
+  
+### 10.3. Fitting a robust regression model using RANSAC
+
+As an alternative to throwing out outliers, we can use a robust method of regression *RANdom SAmple Consensus (RANSAC)* algorithm, which fits a regression model to a subset of the data, the so-called *inliers*.
+
+The algorithm works as follows:
+  1. Select a random number of samples to be inliers and fit the model.
+  2. Test all other data points against the fitted model and add those points that fall within a user-given tolerance to the inliers.
+  3. Refit the model using all inliers.
+  4. Estimate the error of the fitted model versus the inliers.
+  5. Terminate the algorithm if the performance meets a certain user-defined threshold or if a fixed number of iterations has been reached; go back to step 1 otherwise.
+  
+It is invoked via `from sklearn.linear_model import RANSACRegressor`. By default, scikit-learn uses *MAD (Median Absolute Deviation)* to select the inlier threshold.
+
+#### Exercise
+  - Use housing dataset and regress MEDV on RM
+  - Plot the regression line and inlier vs outlier points
