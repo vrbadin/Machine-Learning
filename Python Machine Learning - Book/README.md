@@ -356,13 +356,28 @@ The most popular methods are:
   - *Elastic Net* - take both sum of squared and absolute weights. Limitation of LASSO is that it selects at most `n` variables if `m>n`. L1 penalty generates sparcity and L2 overcomes some of the LASSO limitations.
   
 They can be initialized as follows:
-`from sklearn.linear_model import Ridge, Lasso, ElasticNet
-ridge = Ridge(alpha=1.0)
-lasso = Lasso(alpha=1.0)
-elnet = ElasticNet(alpha=1.0, l1_ratio=0.5)`
+`from sklearn.linear_model import Ridge, Lasso, ElasticNet`
+`ridge = Ridge(alpha=1.0)`
+`lasso = Lasso(alpha=1.0)`
+`elnet = ElasticNet(alpha=1.0, l1_ratio=0.5)`
 For elastic net, if `l1_ratio=1.0`, it would be identical to LASSO.
 
 ### 10.6. Polynomial regression
 
 We are able to use the same `LinearRegression` method with `from sklearn.preprocession import PolynomialFeatures` to perform polynomial regression. Simply define `cube = PolynomialFeatures(degree = 3)` which you then apply on the data via `cube.fit_transform(X)`.
+
+### 10.7. Decision tree and random forest regression
+
+Instead of using the Information Gain metric with the relative entropy measure (used in classification), we are using the Information Gain with MSE, so that we split the data into sum of squares which minimize the overall variance. 
+
+As we have seen in classification, random forest usually has a better generalization performance than the individual decision tree due to randomness that help decrease the model variance. Other advantages of random forests are that they are less sensitive to the outliers in the dataset and don't require much parameter tuning. The only parameter in random forests that we typically need to experiment with is the number of trees in the ensemble.
+
+#### Exercise
+  - Regress MEDV on LSTAT using `from sklearn.tree import DecisionTreeRegressor`
+  - Plot the decision tree line and note it is piecewise constant
+  - Regress MEDV on all features using `from sklearn.ensemble import RandomForestRegressor`
+  - Split the training vs test set and test for MSE, R^2 and residual plot
+  
+
+
 
