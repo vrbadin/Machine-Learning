@@ -320,7 +320,23 @@ where `idf` is *inverse document frequency*:
 
 ### 8.2. Cleaning text data
 
+In case we are reading an HTML document, we might want to remove tags, or we want to count smilies as words. One way of doing it is via regex expressions. Great tutorials on the topic are available on the Google Developers portal at https://developers.google.com/edu/python/regular-expressions or on the official Python's `re` module for regex at https://docs.python.org/3.4/library/re.html .
 
+In the context of tokenization, another useful technique is is *word stemming*, which is the process of transforming a word into its root form that allows us to map related words to the same stem. The original algorithm is called `Porter stemmer algorithm`, which can be invoked via `from nltk.stem.porter import PorterStemmer`. Other popular stemming algorithms include the Snowball and Lancaster stemmers, both available in nltk library. Notice the deficiency of Porter stemmer - it would convert 'thus' into 'thu'. A way to avoid this is via *lemmatization* techniques, however it was observed to have little impact on final results.
+
+Another useful technique is *stop-word removal*. Stop-words are simply those words that are extremely common in all sorts of texts and likely bear no useful information. 
+
+#### Exercise
+  - Test the difference between a regular tokenizer and Porter stemmer
+  - Test the stop-word removal from nltk library
+  
+### 8.3. Further Algorithms
+
+When dealing with large text documents, online algorithm instead of tfidf is available - `HashingVectorizer`.
+
+A popular extension of the bag-of-words model is *Latent Dirichlet allocation*, which considers the latent semantic of the words.
+
+A more modern alternative to bag-of-words is *word2vec*, an algorithm Google released in 2013. The word2vec is an unsupervised learning algorithm based on neural networks that attempts to automatically learn the relationships between words. The idea behind word2vec is to put words that have similar meaning into similar clusters; via clever vector-spacing, the model can reproduce certain words using simple vector math, for example, `king - man + woman = queen`.
 
 ## Chapter 10. Predicting Continuous Target Variables with Regression Analysis
 
