@@ -295,6 +295,33 @@ In contrast to the original boosting procedure, AdaBoost uses the complete train
   
 AdaBoost can be invoked via `sklearn.ensemble.AdaBoostClassifier`.
 
+## Chapter 8. Applying Machine Learning to Sentiment Analysis
+
+### 8.1. Bag-of-words Model
+
+The idea behind bag-of-words model is quite simple:
+  1. We create a *vocabulary* of unique *tokens* from the entire set of documents
+  2. We construct a feature vector from each document that contains the counts of how often each word occurs in the particular document.
+
+It can be constructed via `from sklearn.feature_extraction.text import CountVectorizer`. The count of occurences of a word in each document is called *raw term frequency*:
+`tf(t, d)` - the number of times a term `t` occurs in a document `d`.
+
+The sequence of items we talked about so far are called *1-gram* or *unigram* model - each item or token in the vocabulary represents a single word. More generally, the contiguous sequences of items is also called *n-gram*. Study has shown that n-grams of size 3 and 4 yield a good performance in anti-spam filtering of email messages. It can be controlled via a parameter `ngram_range` of `CountVectorizer`. 2-gram representation would be `ngram_range = (2, 2)`.
+
+When we are analyzing text data, we often encounter words that occur across multiple documents from both classes. Those frequently occurring words typically don't contain useful or discriminatory information. Therefore, we can define *term frequency-inverse document frequency*:
+`tf-idf = tf(t, d) * (idf(t, d) + 1)`, 
+where `idf` is *inverse document frequency*:
+`idf(t, d) = log ((1 + n_d) / (1 + df(d, t)))` and `n_d` is the total number of documents. We can invoke it via `from sklearn.feature_extraction.text import TfidfTransformer` which would by default normalise it in l2 sense (this is controlled by parameter `norm='l2'`).
+
+#### Exercise
+  - Define a simple set of sequences which would represent docs
+  - Create a bag of words, then represent its dictionary and bag of words
+  - Apply tf-idf on this set
+
+### 8.2. Cleaning text data
+
+
+
 ## Chapter 10. Predicting Continuous Target Variables with Regression Analysis
 
 ### 10.1. Visualizing the important characteristics of a dataset
