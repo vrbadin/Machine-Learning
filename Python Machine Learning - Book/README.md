@@ -421,6 +421,49 @@ As we have seen in classification, random forest usually has a better generaliza
   - Regress MEDV on all features using `from sklearn.ensemble import RandomForestRegressor`
   - Split the training vs test set and test for MSE, R^2 and residual plot
   
+## Chapter 11. Working with unlabeled data - Clustering Analysis
 
+In real-world applications of clustering, we do not have any ground truth category information about the samples; otherwise it would fall into the category of supervised learning. Our goal is to group the samples based on their feature similarities.
+
+We will discuss several categories of clustering:
+  - *prototype-based* - each cluster is represented by a prototype, which can either be centroid or the medoid (the most representative or frequently occurring point)
+  - *hierarchical*
+  - *density-based*
+
+### 11.1. K-means and K-Means++
+
+K-means is a prototype-based algorithm. While it is very good at identifying clusters of spherical shape, one of the drawbacks is that we have to specify the number of clusters `k` a priori. It follows the steps:
+  1. Randomly pick `k` centroids from the sample points as initial cluster centers
+  2. Assign each sample to the nearest centroid `m_i`
+  3. Move the centroids to the center of the samples that were assigned to it
+  4. Repeat steps 2 and 3 until the cluster assignments do not change or a user-defined tolerance or a maximum number of iterations is reached
+
+The question is how do we define similarity measure - one way to do it is to define it as the opposite of the distance. Commonly used is Euclidian distance, so we can describe k-means as an iterative approach of minimizing the within-cluster sum of squared errors (SSE), which is also called *cluster intertia*.
+
+Random initialization can sometimes result in bad clusterings or slow convergence. The strategy to remediate is to place the initial cetroids far away from each other via *k-means++* algorithm, which leads to better and more consistent results than the classical k-means. The initialization can be summarized as follows:
+  1. Initialize a empty set `M` to store the `k` centroids being selected
+  2. Randomly choose the first centroid `m_j` from the input samples and assign it to `M`
+  3. For each sample `x_i` not in `M`, find the minimum squared distance `d(x_i, M)^2` to any of the centroids `M`
+  4. To randomly select the next centroid `m_p`, use weighted probability distribution equal to `d(m_p, M)^2 / (sum d(x_i, M)^2)`
+  5. Repeat steps 2 and 3 until `k` centroids are chosen
+  6. Proceed with the classical k-means
+
+To use k-means++ with scikit-learn's `KMeans` object, we just need to set the `init` parameter to `k-means++` (the default setting) instead of `random`.
+
+Another problem with k-means is that one or more clusters can be empty. 
+
+### 11.2. Hard vs Soft clustering
+
+*Hard clustering* describes a family of algorithms where each sample in a dataset is assigned to exactly one cluster, as in the k-means algorithm. In contrast, algorithms for *soft clustering* (also called *fuzzy clustering*) assign a sample to one or more clusters. A popular example is the *fuzzy C-means (FCM)* - also called *soft k-means*. The steps it follows are:
+  1. Specify the number of `k` centroids and randomly assign the cluster memberships for each point
+  2. Compute the cluster centroids `m_j`
+  3. Update the cluster memberships for each point
+  4. Repeat steps 2 and 3 until the membership coefficients don't change or tolerance or max iterations is reached.
+
+The membership indicator is not binary as in k-means - it is based on `w_(i, j) = 1 / (sum_p ( |x-m_i| / |x-m_p| )^(2/(m-1)))`, and the weight would be `w^m`, where `m` is fuzziness coefficient and it is typically chosen to be 2. 
+
+The center `m_j` is computed as the mean of all points with respect to its weight. FCM requires fewer iterations to reach converges than k-means, but it is slower. However, they tend to produce similar outputs.
+
+### 11.3. Elbow method and silhouette plots
 
 
