@@ -430,7 +430,7 @@ We will discuss several categories of clustering:
   - *hierarchical*
   - *density-based*
 
-### 11.1. K-means and K-Means++
+### 11.1. K-means and K-means++
 
 K-means is a prototype-based algorithm. While it is very good at identifying clusters of spherical shape, one of the drawbacks is that we have to specify the number of clusters `k` a priori. It follows the steps:
   1. Randomly pick `k` centroids from the sample points as initial cluster centers
@@ -466,4 +466,13 @@ The center `m_j` is computed as the mean of all points with respect to its weigh
 
 ### 11.3. Elbow method and silhouette plots
 
+One of the challenges is identifying the number of clusters in the dataset. We will explore 2 methods - elbow method and silhouette plots.
 
+Observe the plot of within cluster SSE for various values of number of clusters `k` - intuitively, as `k` increases, the SSE decreases. The idea behind *elbow method* is to identify the value of `k` where the distortion begins to increase most rapidly. In k-means, we have readily available value of within cluster SSE via `inertia_`.
+
+Another intrinsic metric to evaluate the quality of a clustering is *silhouette analysis*, which can also be applied to clustering algorithms other than k-means. Silhouette analysis can be used as a graphical tool to plot a measure of how tightly grouped the samples in the clusters are. To calculate the *silhouette coefficient*, we follow these steps:
+  1. Calculate the *cluster cohesion* `a^(i)` as the average distance between a sample `x^(i)` and all other points in the same cluster.
+  2. Calculate the *cluster separation* `b^(i)` from the next closest cluster as the average distance between the sample `x^(i)` and all samples in the nearest cluster.
+  3. Calculate the *silhouette* `s^(i) = ( b^(i) - a^(i) ) / max( b^(i), a^(i) )`.
+  
+The silhouette coefficient is bounded in the range -1 to 1. Ideal value is 1, obtained when `b^(i) >> a^(i)`. The silhouette coefficient is available as `silhouette_samples` from scikit-learn's `metric` module, and optionally `silhouette_scores` can be imported (which calculates the mean across all silhouette coefficients). As usual, we can specify the metric via `metric` parameter.
