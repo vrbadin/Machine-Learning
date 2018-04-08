@@ -476,3 +476,22 @@ Another intrinsic metric to evaluate the quality of a clustering is *silhouette 
   3. Calculate the *silhouette* `s^(i) = ( b^(i) - a^(i) ) / max( b^(i), a^(i) )`.
   
 The silhouette coefficient is bounded in the range -1 to 1. Ideal value is 1, obtained when `b^(i) >> a^(i)`. The silhouette coefficient is available as `silhouette_samples` from scikit-learn's `metric` module, and optionally `silhouette_scores` can be imported (which calculates the mean across all silhouette coefficients). As usual, we can specify the metric via `metric` parameter.
+
+### 11.4. Organizing clusters as a hierarchical tree
+
+One advantage of hierarchical clustering algorithms is that it allows us to plot *dendrograms* (visualizations of a binary hierarchical clustering), which can help with the interpretation of the results by creating meaningful taxonomies. Another useful advantage is that we don't have to specify the number of clusters upfront. The two main approaches to clustering are:
+  - *agglomerative* - (more popular) start with each sample as a cluster, then iteratively merge closest pairs
+  - *divisive* - start with one global cluster and iteratively split until each cluster contains one sample
+  
+Two standard algorithms for aglomerative clustering are:
+  - *single linkage* - compute distance between most similar members
+  - *complete linkage* - compute distance between most distant members
+Other linkages are average linkage and Ward's linkage.
+
+#### Exercise
+  - Create a sample dataset of random sample
+  - Create euclidean distance matrix
+  - Apply complete linkage using `scipy.cluster.hierarchy`
+  - Plot dendrogram
+  - Attach dendrogram to heat map
+  - Use `sklearn.cluster.AgglomerativeClustering` with 2 clusters
