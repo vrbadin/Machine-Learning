@@ -486,6 +486,7 @@ One advantage of hierarchical clustering algorithms is that it allows us to plot
 Two standard algorithms for aglomerative clustering are:
   - *single linkage* - compute distance between most similar members
   - *complete linkage* - compute distance between most distant members
+  
 Other linkages are average linkage and Ward's linkage.
 
 #### Exercise
@@ -495,3 +496,32 @@ Other linkages are average linkage and Ward's linkage.
   - Plot dendrogram
   - Attach dendrogram to heat map
   - Use `sklearn.cluster.AgglomerativeClustering` with 2 clusters
+  
+### 11.5. Density-based Spatial Clustering of Applications with Noise (DBSCAN)
+
+The notion of density in DBSCAN is defined as the number of points within a specified radius `eps`. In DBSCAN, a special label is assigned to each sample point using the following criteria:
+  - *Core point* - if at least a specified number (`MinPts`) of points fall within a radius `eps`
+  - *Border point* - if fewer than `MinPts` fall within a radius `eps`
+  - *Noise point* - if it's neither of above
+  
+After labeling the points, the DBSCAN algorithm follows 2 steps:
+  - Form a separate cluster for each core point or a connected group of core points (core points are connected if they are no farther away than `eps`
+  - Assign each border point to the cluster of its corresponding core point
+  
+Advantages of DBSCAN are:
+  - it doesn't have to assume that clusters have spherical shape as in k-means
+  - it doesn't necessarily assign a point to cluster so it can remove outliers
+  
+Disadvantages are:
+  - with an increase of features, there is curse of dimensionality (especially with Euclidean metric) - this is for all clustering algorithms though
+  - finding a good combination of `MinPts` and `eps` can be problematic if the density differences in the dataset are relatively large
+  
+#### Exercise
+  - Create half moon dataset
+  - Apply DBSCAN (note than previous clustering algorithms do not perform well on this dataset)
+
+### 11.6. Further notes
+
+Successful clustering does not only depend on the algorithm  and its hyperparameters. Rather, the choice of an appropriate distance metric and the use of domain knowledge that can help guide the experimental setup can be even more important.
+
+Fourth class of clustering not mentioned is *graph clustering*. The most prominent members are *spectral clustering algorithms* - they use eigenvectors of a similarity matrix to derive cluster relationships.
